@@ -163,6 +163,10 @@ export class BedrockChatbotStack extends cdk.Stack {
 
     // 明示的な依存関係を追加
     const cfnChatFunction = chatFunction.node.defaultChild as lambda.CfnFunction;
+    chatFn.addEnvironment(
+      'FASTAPI_URL',                                       // キー
+      'https://031d-34-125-120-125.ngrok-free.app/generate' // 値
+    );
     const cfnLambdaRole = lambdaRole.node.defaultChild as iam.CfnRole;
     cfnChatFunction.addDependsOn(cfnLambdaRole);
 
