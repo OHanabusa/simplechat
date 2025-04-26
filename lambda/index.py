@@ -22,8 +22,10 @@ def extract_region_from_arn(arn: str) -> str:
 #  定数・環境変数
 # -----------------------------
 # CDK / Lambda コンソールで設定した環境変数に
-# 例: FASTAPI_URL = https://031d-34-125-120-125.ngrok-free.app/generate
-FASTAPI_URL = os.environ["https://031d-34-125-120-125.ngrok-free.app/generate"]
+FASTAPI_URL = os.getenv("FASTAPI_URL")
+if not FASTAPI_URL:
+    raise RuntimeError("環境変数 FASTAPI_URL が設定されていません")
+
 
 
 # -----------------------------
