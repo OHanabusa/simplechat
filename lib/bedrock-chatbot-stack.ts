@@ -158,15 +158,12 @@ export class BedrockChatbotStack extends cdk.Stack {
       role: lambdaRole,
       environment: {
         MODEL_ID: modelId,
+        FASTAPI_URL: 'https://031d-34-125-120-125.ngrok-free.app/generate', // ★ ここに追加
       },
     });
 
     // 明示的な依存関係を追加
     const cfnChatFunction = chatFunction.node.defaultChild as lambda.CfnFunction;
-    cfnChatFunction.addEnvironment(
-      'FASTAPI_URL',                                       // キー
-      'https://031d-34-125-120-125.ngrok-free.app/generate' // 値
-    );
     const cfnLambdaRole = lambdaRole.node.defaultChild as iam.CfnRole;
     cfnChatFunction.addDependsOn(cfnLambdaRole);
 
